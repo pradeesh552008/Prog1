@@ -1,0 +1,34 @@
+name: SQL Autograding
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  test-sql:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+
+    - name: Install MySQL
+      run: |
+        sudo apt update
+        sudo apt install mysql-server -y
+
+
+    - name: Start MySQL
+      run: |
+        sudo service mysql start
+
+
+    - name: Run SQL Test
+      run: |
+        chmod +x test.sh
+        ./test.sh
